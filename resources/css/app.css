@@ -1,3 +1,71 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Mrs+Saint+Delafield&display=swap");
+
+:root {
+    --primary-color: #fcdfb3;
+}
+
+* {
+    font-family: "Josefin Sans", arial;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #140d40;
+
+    position: relative;
+}
+
+.curtain-container {
+    display: flex;
+    gap: -10px;
+}
+
+.curtain {
+    height: 100vh;
+    width: calc(1vw + 80px);
+    background-color: #4c2fc1;
+}
+
+.curtain-1 {
+    background-color: #41499e;
+}
+.curtain-2 {
+    background-color: #393895;
+}
+.curtain-3 {
+    background-color: #2d2c7c;
+}
+.curtain-4 {
+    background-color: #231e60;
+}
+
+/* Square */
+
+.square-1 {
+    position: absolute;
+    top: -8%;
+    left: 40%;
+    z-index: -9;
+    transform: translate(-50%, -50%);
+    transform: rotate(-50deg);
+
+    width: 180px;
+    height: 180px;
+    background-color: rgba(82, 73, 158, 0.5);
+}
+
+.square-2 {
+    position: absolute;
+    bottom: -12%;
+    left: 65%;
+    z-index: -9;
+    transform: translate(-50%, -50%);
+    transform: rotate(-20deg);
+    width: 200px;
+    height: 200px;
+    background-color: rgba(82, 73, 158, 0.5);
+}
