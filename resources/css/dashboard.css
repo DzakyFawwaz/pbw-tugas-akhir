@@ -47,11 +47,11 @@ ul {
     font-size: 18px;
 }
 
-ul li {
+ul li, ul a {
     cursor: pointer;
 }
 
-ul li:hover {
+ul li:hover, ul a:hover {
     text-decoration: underline;
     text-underline-offset: 15px;
 }
@@ -90,6 +90,7 @@ ul li:hover {
 /* Aside */
 
 .aside {
+    overflow: hidden;
     position: absolute;
     right: 0;
     top: 0;
@@ -187,7 +188,8 @@ img {
     object-fit: fill;
     border-radius: 5px;
 }
-.book-image {
+.book-image:hover {
+    cursor: pointer;
 }
 
 .selected-book-image {

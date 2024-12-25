@@ -15,6 +15,7 @@ body {
     text-transform: uppercase;
     letter-spacing: 7px;
 }
+
 a {
     color: var(--primary-color);
     text-decoration: underline;
@@ -46,7 +47,7 @@ h1 {
     justify-content: space-between;
 }
 
-form {
+.input-wrapper {
     width: 400px;
     height: fit-content;
     min-height: 200px;

@@ -2,10 +2,32 @@
 
 namespace App\Models;
 
-class Book
+use Illuminate\Support\Arr;
+use Illuminate\Database\Eloquent\Model;
+
+class Book extends Model
 {
-    public static function all()
+
+    protected $fillable = [
+        'title',
+        'genre',
+        'description',
+        'rating',
+        'author',
+        'synopsis',
+        'cover_url',
+        'tags',
+        'publication_date',
+        'number_of_pages',
+        'publisher',
+        'language',
+        'characters',
+    ];
+
+    public static function find($book_id)
     {
-        return config('data.books');
+
+        $books = static::all();
+        return Arr::first($books, fn($book) => $book->id == $book_id);
     }
 }
