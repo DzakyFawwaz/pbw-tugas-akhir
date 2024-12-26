@@ -47,11 +47,13 @@ ul {
     font-size: 18px;
 }
 
-ul li, ul a {
+ul li,
+ul a {
     cursor: pointer;
 }
 
-ul li:hover, ul a:hover {
+ul li:hover,
+ul a:hover {
     text-decoration: underline;
     text-underline-offset: 15px;
 }
@@ -90,13 +92,11 @@ ul li:hover, ul a:hover {
 /* Aside */
 
 .aside {
-    overflow: hidden;
     position: absolute;
     right: 0;
     top: 0;
     min-height: 100%;
 }
-
 .aside-1 {
     background-color: #2d2c7c;
     width: calc(10vw + 230px);
