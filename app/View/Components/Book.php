@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Layout extends Component
+class Book extends Component
 {
 
     public $book;
@@ -15,7 +15,7 @@ class Layout extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct($book, $page = 'dashboard')
+    public function __construct($book, $page = "dashboard")
     {
         $this->book = $book;
         $this->page = $page;
@@ -26,6 +26,6 @@ class Layout extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.layout');
+        return view('components.book');
     }
 }

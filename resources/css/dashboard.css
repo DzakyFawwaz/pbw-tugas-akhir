@@ -106,6 +106,8 @@ ul a:hover {
 }
 
 .selected-book {
+    max-height: 100vh;
+    overflow: hidden;
     position: sticky;
     right: 60px;
     top: 0;
@@ -192,10 +194,42 @@ img {
     cursor: pointer;
 }
 
-.selected-book-image {
+.selected-book-image-wrapper {
     display: flex;
     justify-content: center;
     margin: 1rem 0;
+    position: relative;
+}
+
+.selected-book-image {
+    position: relative;
+}
+
+.save-cta {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    align-items: center;
+    top: -15px;
+    right: -15px;
+    width: 50px;
+    height: 50px;
+    background-color: #fcdfb3;
+    border-radius: 50%;
+    transition: ease-in-out 0.1s;
+}
+
+.save-cta svg {
+    color: #150e41;
+}
+
+.save-cta:hover {
+    cursor: pointer;
+    width: 52px;
+    height: 52px;
+    top: -16px;
+    right: -16px;
+    transition: ease-in-out 0.1s;
 }
 
 .book-image-1,

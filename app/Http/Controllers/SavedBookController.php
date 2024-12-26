@@ -2,36 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Book;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\SavedBook;
-use Illuminate\Auth\Events\Validated;
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class DashboardController extends Controller
+class SavedBookController extends Controller
 {
     public function view(Request $request)
     {
 
-        $selected_book_id = $request->input("selected-book");
+        $selected_book_id = $request->input(("selected-book"));
+        $books = DB::table('saved_books');
 
-        $books_table = DB::table('books');
-        $on_reads = $books_table
-            ->join('histories', 'books.id', '=', 'histories.book_id')
-            ->where('user_id', Auth::user()->id)
-            ->limit(2)
+        $saved_books = $books
+            ->join('books', 'books.id', '=', 'saved_books.book_id')
+            ->where('user_id', '=', Auth::user()->id)
             ->get();
 
-        // jika tidak ada request, ambil 1 buku yang sedang dibaca
+        // jika tidak ada request, ambil 1 buku yang disimpan
         if (!isset($selected_book_id) && isset($on_reads) && count($on_reads) > 0) {
-            $selected_book_id = head($on_reads)[0]->id;
+            $selected_book_id = head($saved_books)[0]->id;
         }
 
-        $selected_book = Book::query()
-            ->firstWhere('id', $selected_book_id);
-
+        $selected_book = Arr::first($saved_books, fn($book) => $book->book_id == $selected_book_id);
 
         // cek buku di simpan
         if ($selected_book) {
@@ -42,13 +37,10 @@ class DashboardController extends Controller
                 ->exists();
         }
 
-
-        return view('dashboard', [
-            'books' => $books_table->select('id', 'title', 'rating', 'cover_url'),
-            'trendings' => Book::query()->where('tags', "Trending")->get(),
-            'favorites' => Book::query()->where('tags', "Favorite")->get(),
+        return view('savedbooks', [
+            'title' => "Buku Disimpan",
+            'saved_books' => $saved_books,
             'selected_book' => $selected_book,
-            'on_reads' => $on_reads
         ]);
     }
 
@@ -75,6 +67,6 @@ class DashboardController extends Controller
             $saveBook->save();
         }
 
-        return redirect('dashboard?selected-book=' . $selected_book_id);
+        return redirect('saved?selected-book=' . $selected_book_id);
     }
 }

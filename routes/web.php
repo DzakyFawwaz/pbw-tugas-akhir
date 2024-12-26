@@ -6,12 +6,10 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SavedBookController;
 use App\Http\Controllers\UserController;
-use App\Models\Book;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,17 +22,23 @@ Route::get('/signup', function () {
     return view('signup', ['title' => 'Buat Akun', 'header' => 'Buat Akun']);
 })->name('signup');
 
-Route::get('/dashboard', [DashboardController::class, 'showPage'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'view'])->name('dashboard');
+Route::post('/dashboard', [DashboardController::class, 'save'])->name('dashboard.save');
 
 Route::get('/book/{book_id}', [BookController::class, 'find'])->name('book');
 
-Route::get('/encrypt/{id}', function ($id) {
+Route::get('/history', [HistoryController::class, 'view'])->name('history');
+
+Route::get('/saved', [SavedBookController::class, 'view'])->name('saved');
+Route::post('/saved', [SavedBookController::class, 'save'])->name('saved.save');
+
+// Route::get('/encrypt/{id}', function ($id) {
 
 
-    DB::table('users')
-        ->where('id', $id)
-        ->update(['password' => Hash::make('admin123')]);
-});
+//     DB::table('users')
+//         ->where('id', $id)
+//         ->update(['password' => Hash::make('admin123')]);
+// });
 
 // Route::get('/bookcreate', function () {
 
