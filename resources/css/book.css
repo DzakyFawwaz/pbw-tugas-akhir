@@ -2,7 +2,47 @@
 
 * {
     font-family: "Josefin Sans", arial;
+    /* color: var(--primary-color); */
+}
+
+h1 {
     color: var(--primary-color);
+}
+
+.body-book {
+    background-color: #140d40;
+    opacity: 1;
+    background-image: linear-gradient(
+            rgba(253, 253, 253, 0.1) 0.7000000000000001px,
+            transparent 0.7000000000000001px
+        ),
+        linear-gradient(
+            to right,
+            rgba(253, 253, 253, 0.1) 0.7000000000000001px,
+            #140d40 0.7000000000000001px
+        );
+    background-size: 14px 14px;
+}
+
+p,
+span,
+a {
+    color: #fff;
+}
+
+p {
+    text-indent: 2em;
+    margin-bottom: 1rem;
+    color: #ffffffc5;
+}
+
+.icon-rating {
+    /* margin-top: 5px;
+    margin-left: 2px; */
+    color: #ffd900 !important;
+    height: 25px;
+    width: 25px;
+    margin: 0;
 }
 
 body {

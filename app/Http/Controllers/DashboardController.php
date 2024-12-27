@@ -6,7 +6,6 @@ use App\Models\Book;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\SavedBook;
-use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -18,9 +17,13 @@ class DashboardController extends Controller
         $selected_book_id = $request->input("selected-book");
 
         $books_table = DB::table('books');
-        $on_reads = $books_table
-            ->join('histories', 'books.id', '=', 'histories.book_id')
-            ->where('user_id', Auth::user()->id)
+        $on_reads_query = $books_table->join('histories', 'books.id', '=', 'histories.book_id');
+
+        if (Auth::check()) {
+            $on_reads_query = $on_reads_query->where('user_id', Auth::user()->id);
+        }
+
+        $on_reads = $on_reads_query
             ->limit(2)
             ->get();
 
@@ -32,9 +35,8 @@ class DashboardController extends Controller
         $selected_book = Book::query()
             ->firstWhere('id', $selected_book_id);
 
-
         // cek buku di simpan
-        if ($selected_book) {
+        if ($selected_book && Auth::check()) {
             $selected_book->is_saved =
                 SavedBook::query()
                 ->where('book_id', $selected_book_id)
@@ -44,37 +46,19 @@ class DashboardController extends Controller
 
 
         return view('dashboard', [
-            'books' => $books_table->select('id', 'title', 'rating', 'cover_url'),
-            'trendings' => Book::query()->where('tags', "Trending")->get(),
-            'favorites' => Book::query()->where('tags', "Favorite")->get(),
             'selected_book' => $selected_book,
-            'on_reads' => $on_reads
+            'on_reads' => $on_reads,
+            'trendings' => Book::query()
+                ->where('tags', "Trending")
+                ->get(),
+            'favorites' => Book::query()
+                ->where('tags', "Favorite")
+                ->get(),
         ]);
     }
 
-    public function save(Request $request)
+    public function redirect()
     {
-        $selected_book_id = $request->input("selected-book");
-        $user_id = Auth::user()->id;
-
-        $book = SavedBook::query()
-            ->where([
-                'book_id' => $selected_book_id,
-                'user_id' => $user_id
-            ])->first();
-
-        // cek buku di table simpan
-        if ($book) {
-            SavedBook::where([
-                'id' => $book->id
-            ])->delete();
-        } else {
-            $saveBook = new SavedBook();
-            $saveBook->book_id = $selected_book_id;
-            $saveBook->user_id = $user_id;
-            $saveBook->save();
-        }
-
-        return redirect('dashboard?selected-book=' . $selected_book_id);
+        return redirect('dashboard');
     }
 }

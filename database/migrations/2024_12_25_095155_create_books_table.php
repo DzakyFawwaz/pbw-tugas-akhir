@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('publisher');
             $table->string('language');
             $table->string('characters');
+            $table->string('stories');
             $table->timestamps();
         });
     }

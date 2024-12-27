@@ -67,6 +67,6 @@ class SavedBookController extends Controller
             $saveBook->save();
         }
 
-        return redirect('saved?selected-book=' . $selected_book_id);
+        return back();
     }
 }

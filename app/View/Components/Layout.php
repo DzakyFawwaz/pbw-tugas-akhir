@@ -15,7 +15,7 @@ class Layout extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct($book, $page = 'dashboard')
+    public function __construct($book = null, $page = 'dashboard')
     {
         $this->book = $book;
         $this->page = $page;
