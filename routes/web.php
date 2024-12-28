@@ -44,6 +44,10 @@ Route::middleware(['auth'])->group(function () {
     // Setting
     Route::post('/setting', [UserController::class, 'update'])
         ->name('setting.update');
+
+    // Add Book
+    Route::get('/add-book', [BookController::class, 'view'])
+    ->name('add-book');
 });
 
 
@@ -68,3 +72,7 @@ Route::post('/signup', [AuthController::class, 'create'])
 Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');
+
+// Add Book
+Route::post('/add-book', [BookController::class, 'create'])
+    ->name('add-book.create');

@@ -79,4 +79,23 @@
 
     @endif
 
+    @if (isset($others) && count($others) > 0)
+        <section class="main-section">
+            <h1 class="text-2xl mb-5">Mungkin kamu suka</h1>
+
+            <div class="trending-section">
+                <div class="trending-section">
+                    @foreach ($others as $book)
+                        <x-book :book="$book"></x-book>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+
+        <br />
+        <br />
+        <br />
+
+    @endif
+
 </x-layout>

@@ -80,8 +80,12 @@ body {
     gap: 2rem;
 }
 
+textarea,
 input[type="email"],
+input[type="url"],
 input[type="text"],
+input[type="number"],
+input[type="date"],
 input[type="password"] {
     background-color: rgba(252, 223, 179, 0.2);
     color: var(--primary-color);
@@ -93,7 +97,7 @@ input[type="password"] {
     width: -webkit-fill-available;
 }
 
-input::placeholder {
+input::placeholder, textarea::placeholder {
     color: var(--primary-color);
     font-family: "Josefin Sans", arial;
     opacity: 0.5;

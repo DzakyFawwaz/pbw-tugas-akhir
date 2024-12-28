@@ -25,52 +25,21 @@ class UserController extends Controller
     {
 
         $user = User::find(Auth::user()->id);
-        $validated = request()->validate([]);
+        $validated = request()->validate([
+            'email' => 'required|string|email|max:255|unique:users,email,' . Auth::user()->id,
+            'fullname' => 'nullable|string|min:8',
+            'username' => 'required|string',
+            'password' => 'nullable|string|min:8|confirmed',
+        ]);
 
-        if (request('email')) {
-            $validated = array_merge($validated, request()->validate([
-                'email' => 'nullable|string|email|max:255|unique:users,email,' . Auth::user()->id,
-            ]));
+        if (isset($validated['password'])) {
+            $validated['password'] = bcrypt($validated['password']);
+            $user->update($validated);
+        } else {
+            $user->update(array_filter($validated, function ($key) {
+                return $key !== 'password';
+            }, ARRAY_FILTER_USE_KEY));
         }
-
-        if (request('name')) {
-            $validated = array_merge($validated, request()->validate([
-                'name' => 'nullable|string|min:8',
-            ]));
-        }
-
-        if (request('username')) {
-            $validated = array_merge($validated, request()->validate([
-                'username' => 'nullable|string',
-            ]));
-        }
-
-        if (request('password')) {
-            $validated = array_merge($validated, request()->validate([
-                'password' => 'nullable|string|min:8|confirmed',
-            ]));
-            $user->password = bcrypt(request('password'));
-        }
-
-        if (array_key_exists('email', $validated)) {
-            $user->email = request('email');
-        }
-
-        if (array_key_exists('name', $validated)) {
-            $user->name = request('name');
-        }
-
-        if (array_key_exists('username', $validated)) {
-            $user->username = request('username');
-        }
-
-        if (array_key_exists('password', $validated)) {
-            $user->password = bcrypt(request('password'));
-        }
-
-        $user->save();
-
-
 
         return redirect()->route('setting');
     }

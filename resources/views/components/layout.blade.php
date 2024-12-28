@@ -33,7 +33,8 @@
                                 {{-- Cross Site Request Forgery --}}
                                 @csrf
 
-                                <button type="submit" class="group flex justify-center items-center top-[-15px] right-[-15px] absolute w-12 h-12 bg-primary rounded-full transition-all">
+                                <button type="submit"
+                                    class="group flex justify-center items-center top-[-15px] right-[-15px] absolute w-12 h-12 bg-primary rounded-full transition-all">
                                     @if ($book->is_saved)
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                             class="text-primary w-6 h-7 group-hover:w-7 group-hover:h-8 transition-all">
@@ -43,7 +44,8 @@
                                         </svg>
                                     @else
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="3" stroke="currentColor" class="text-primary w-6 h-7 group-hover:w-7 group-hover:h-8 transition-all">
+                                            stroke-width="3" stroke="currentColor"
+                                            class="text-primary w-6 h-7 group-hover:w-7 group-hover:h-8 transition-all">
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
                                         </svg>
@@ -63,17 +65,19 @@
                         {{ $book->description ?? '' }}
                     </span>
                 </div>
-                <div class="selected-book-rating">
-                    <div class="stars">
-                        <svg class="icon-rating" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                            class="size-6">
-                            <path fill-rule="evenodd"
-                                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                                clip-rule="evenodd" />
-                        </svg>
+                @isset($book->rating)
+                    <div class="flex justify-center mt-4 gap-2">
+                        <div class="stars">
+                            <svg class="icon-rating" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="size-6">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <p class="text-lg">{{ $book->rating ?? '' }}</p>
                     </div>
-                    <p>{{ $book->rating ?? '' }}</p>
-                </div>
+                @endisset
 
                 @auth
                     <a href="/book/{{ $book->id ?? '' }}" class="selected-book-cta-read">

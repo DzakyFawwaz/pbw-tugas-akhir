@@ -37,6 +37,8 @@
                 <h2 class="book-title font-bold">{{ $book->title }}</h2>
                 <p class="book-author">{{ $book->author }}</p>
             </div>
+
+            @isset($book->rating)
             <div class="book-action">
                 <svg class="icon-rating" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                     class="size-6">
@@ -46,6 +48,8 @@
                 </svg>
                 <span>{{ $book->rating }}</span>
             </div>
+
+            @endisset
         </div>
     </a>
 @endif

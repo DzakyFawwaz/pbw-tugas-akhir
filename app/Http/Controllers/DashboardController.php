@@ -54,6 +54,9 @@ class DashboardController extends Controller
             'favorites' => Book::query()
                 ->where('tags', "Favorite")
                 ->get(),
+            'others' => Book::query()
+                ->where('tags', null)
+                ->get(),
         ]);
     }
 
