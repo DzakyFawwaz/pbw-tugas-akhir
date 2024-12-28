@@ -12,7 +12,20 @@
 </head>
 
 <body class="body-book">
-    <section class="xl:w-1/2 lg:w-1/2 md:w-1/w sm:w-100 pt-14 w-100 mx-auto">
+    <section class=" xl:w-1/2 lg:w-1/2 md:w-1/w sm:w-100 pt-14 w-100 mx-auto">
+
+
+        <div class="relative">
+
+            <div onclick="window.history.back()" class="flex group justify-center items-center top-0 left-[-70px] absolute w-12 h-12 bg-primary rounded-full cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" class="transition-all group-hover:w-6 group-hover:h-6 w-5 h-5 text-primary"
+                    stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                </svg>
+            </div>
+
+        </div>
+
         <div class="xl:flex lg:flex md:flex sm:flex block">
             <img class="h-96 w-64 rounded-lg" src="{{ $book->cover_url }}" />
             <div class="p-8">

@@ -2,7 +2,7 @@
 
 
 @if ($is_reading)
-    <a class="book" href="/{{ $page }}?selected-book={{ $book->book_id }}">
+    <a href="/{{ $page }}?selected-book={{ $book->book_id }}">
         <img class="book-image book-image-1 rounded-lg" src="{{ $book->cover_url }}" width="200" height="280" />
         <div class="book-info">
             <div>

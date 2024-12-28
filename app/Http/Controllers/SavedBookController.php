@@ -61,10 +61,10 @@ class SavedBookController extends Controller
                 'id' => $book->id
             ])->delete();
         } else {
-            $saveBook = new SavedBook();
-            $saveBook->book_id = $selected_book_id;
-            $saveBook->user_id = $user_id;
-            $saveBook->save();
+            $savedBook = new SavedBook();
+            $savedBook->book_id = $selected_book_id;
+            $savedBook->user_id = $user_id;
+            $savedBook->save();
         }
 
         return back();

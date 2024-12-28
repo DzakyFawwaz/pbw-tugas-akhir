@@ -60,7 +60,10 @@ Route::post('/saved', [SavedBookController::class, 'save'])
 
 // Auth
 Route::post('/login', [AuthController::class, 'authenticate'])
-    ->name('login.authenticate');
+    ->name('auth.login');
+
+Route::post('/signup', [AuthController::class, 'create'])
+    ->name('auth.signup');
 
 Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')

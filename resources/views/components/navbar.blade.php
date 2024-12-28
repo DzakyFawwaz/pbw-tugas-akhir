@@ -19,7 +19,7 @@
                 <span href="{{ $menu['url'] }}"
                     :active="request() - > is($key) || request() - > is($key.
                         '/*')">
-                    {{ Auth::user()->username }}
+                    {{ '@' . Auth::user()->username }}
                 </span>
             @else
                 <x-nav-link href="/login">

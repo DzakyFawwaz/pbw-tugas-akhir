@@ -96,4 +96,5 @@ input[type="password"] {
 input::placeholder {
     color: var(--primary-color);
     font-family: "Josefin Sans", arial;
+    opacity: 0.5;
 }

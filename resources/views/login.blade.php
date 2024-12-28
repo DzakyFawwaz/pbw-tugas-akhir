@@ -1,9 +1,29 @@
 <x-layout-auth>
     <x-slot:title>{{ $title }}</x-slot:title>
 
-    <form action="{{ route('login.authenticate') }}" method="POST">
-        @csrf
+    @if (session('success'))
+        <div class="mx-5 w-1/5 absolute top-10 left-10">
+            <div x-data="{ show: true }" x-show="show"
+                class="bg-white bg-opacity-10 border-l-4 border-green-500 text-green-500 p-4 rounded-lg">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p class="text-lg font-semibold">{{ session('success') ?? 'Login Success' }}</p>
+                    </div>
+                    <button @click="show = false" class="text-green-700 font-bold">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                        </svg>
 
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    @endif
+
+    <form action="{{ route('auth.login') }}" method="POST">
+        @csrf
 
         <section class="form-container">
             <div class="form-wrapper">
@@ -15,18 +35,25 @@
                 </header>
 
                 <div class="input-wrapper">
-                    <input type="text" id="username" name="username" value="{{ old('username') }}" placeholder="Username" />
-                    @error('username')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
-
-                    <div class="password-input">
-                        <input type="password" id="password" name="password" value="{{ old('password') }}" placeholder="Password" />
-                        <i class="password-toggle"></i>
+                    <div>
+                        <input type="text" id="username" name="username" value="{{ old('username') }}"
+                            placeholder="Username" />
+                        @error('username')
+                            <div class="text-red-500 mt-3">{{ $message }}</div>
+                        @enderror
                     </div>
-                    @error('password')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
+
+                    <div>
+                        <div class="password-input">
+                            <input type="password" id="password" name="password" value="{{ old('password') }}"
+                                placeholder="Password" />
+                            <i class="password-toggle"></i>
+                        </div>
+                        @error('password')
+                            <div class="text-red-500 mt-3">{{ $message }}</div>
+                        @enderror
+
+                    </div>
                     <button type="submit" class="button-normal">Masuk</button>
 
                 </div>
